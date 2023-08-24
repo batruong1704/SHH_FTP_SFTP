@@ -1,16 +1,14 @@
-# how to use SHH/FTP/SFTP:
+# How to use SHH/FTP/SFTP:
 ## Install SSH:
-**Bước 1: Cấu hình SSH trên Ubuntu:**
-1. Mở Terminal trên máy ảo Ubuntu.
-
-2. Đảm bảo rằng dịch vụ SSH đang hoạt động. Nếu chưa, bạn có thể cài đặt và khởi động nó bằng cách chạy các lệnh sau:
+### **A. Cấu hình SSH trên Ubuntu:**
+1. Cài đặt SSH.
    ```
    sudo apt update
    sudo apt install openssh-server
    sudo systemctl start ssh
    ```
 
-3. (Tùy chọn) Để thay đổi cổng mặc định cho SSH, bạn có thể sửa tệp cấu hình SSH:
+2. Cấu hình SSH:
    ```
    sudo nano /etc/ssh/sshd_config
    ```
@@ -19,18 +17,18 @@
    sudo systemctl restart ssh
    ```
 
-4. Tạo người dùng mới để sử dụng SSH:
+3. Tạo người dùng mới để sử dụng SSH:
    ```
    sudo adduser <tên_người_dùng>
    ```
 
-5. Gán quyền sử dụng SSH cho người dùng mới:
+4. Gán quyền sử dụng SSH cho người dùng mới:
    ```
    sudo usermod -aG sudo <tên_người_dùng>
    ```
 
-**Bước 2: Cấu hình FTP/SFTP trên Ubuntu:**
-1. Cài đặt dịch vụ FTP trên máy ảo:
+### **B. Cấu hình FTP/SFTP trên Ubuntu:**
+1. Cài đặt FTP:
    ```
    sudo apt install vsftpd
    ```
@@ -67,7 +65,7 @@
    sudo systemctl restart vsftpd
    ```
 
-**Bước 3: Phân quyền cho người dùng:**
+### **C. Phân quyền cho người dùng:**
 1. Để cho phép người dùng sử dụng SSH và FTP, hãy đảm bảo rằng người dùng đã được thêm vào các nhóm tương ứng (sudo và ftp):
    ```
    sudo usermod -aG sudo,ftp <tên_người_dùng>
@@ -77,5 +75,3 @@
    ```
    sudo chown -R <tên_người_dùng>:<tên_người_dùng> /home/<tên_người_dùng>
    ```
-
-Nhớ rằng việc cấu hình hệ thống và phân quyền là quá trình nhạy bén và có thể gây ảnh hưởng đến bảo mật của hệ thống. Hãy thực hiện các bước trên cẩn thận và hiểu rõ tác động của chúng trước khi thực hiện.
