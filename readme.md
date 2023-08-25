@@ -14,58 +14,22 @@
    ```
    Sau đó, thay đổi cấu hình như sau:
    ```
-   # This is the sshd server system-wide configuration file.  See
-   # sshd_config(5) for more information.
-
    # This sshd was compiled with       PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
    Include /etc/ssh/sshd_config.d/*.conf
 
    Port 22
-   #AddressFamily any
    ListenAddress 0.0.0.0
-   #ListenAddress ::
    HostKey /etc/ssh/ssh_host_rsa_key
    HostKey /etc/ssh/ssh_host_ecdsa_key
    HostKey /etc/ssh/ssh_host_ed25519_key
-
-   # Ciphers and keying
-   #RekeyLimit default none
-
-   # Logging
-   #SyslogFacility AUTH
    SyslogFacility AUTHPRIV
-   #LogLevel INFO
-
-   # Authentication:
-
-   #LoginGraceTime 2m
-   #PermitRootLogin prohibit-password
    PermitRootLogin yes
-   #StrictModes yes
-   #MaxAuthTries 6
-   #MaxSessions 10
    PubkeyAuthentication yes
 
-   # Expect .ssh/authorized_keys2 to be disregarded by default in future.
    AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
-
-   #AuthorizedPrincipalsFile none
-
-   #AuthorizedKeysCommand none
-   #AuthorizedKeysCommandUser nobody
-
    UsePAM yes
-   #AllowAgentForwarding yes
-   #AllowTcpForwarding yes
-   
-   #AllowTcpForwarding yes
-   #GatewayPorts no
    X11Forwarding yes
-   #X11DisplayOffset 10
-   #X11UseLocalhost yes
    PrintMotd no
-   # Allow client to pass locale environment variables
    AcceptEnv LANG LC_*
    Subsystem       sftp    /usr/lib/openssh/sftp-server
    ```
@@ -161,6 +125,28 @@
    Sudo su
    sudo su <username>
    ```
-
-
+9. Chuyển file giữa 2 máy
+   ```
+   scp [options] <diachigoc> <diachicantruyen>
+   ```
+   ##### Ví dụ: chuyển folder project1 từ máy client tới máy ảo và lưu ở 
+   ```
+   scp -r /mylaptop/document/project1 root@192.168.1.11:/home/data
+   ```
+   ##### Một vài options:
+   - `-r`: Sao chép thư mục và nội dung bên trong (tùy chọn này được sử dụng khi bạn muốn sao chép thư mục).
+   - `-P <port>`: Xác định cổng sử dụng để kết nối SSH (mặc định là cổng 22).
+   - `-i <identity_file>`: Xác định tập tin khóa cá nhân (private key) sử dụng để xác thực đối tượng từ xa.
+   - `-v`: Hiển thị thông tin chi tiết về tiến trình sao chép.
    
+
+
+
+
+
+
+
+
+
+
+
