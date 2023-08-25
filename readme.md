@@ -12,17 +12,74 @@
    ```
    sudo nano /etc/ssh/sshd_config
    ```
-   Sau đó, tìm dòng "Port" và thay đổi số cổng thành số cổng mong muốn. Sau khi sửa đổi, lưu tệp và khởi động lại dịch vụ SSH:
+   Sau đó, thay đổi cấu hình như sau:
+   ```
+   # This is the sshd server system-wide configuration file.  See
+   # sshd_config(5) for more information.
+
+   # This sshd was compiled with       PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+   Include /etc/ssh/sshd_config.d/*.conf
+
+   Port 22
+   #AddressFamily any
+   ListenAddress 0.0.0.0
+   #ListenAddress ::
+   HostKey /etc/ssh/ssh_host_rsa_key
+   HostKey /etc/ssh/ssh_host_ecdsa_key
+   HostKey /etc/ssh/ssh_host_ed25519_key
+
+   # Ciphers and keying
+   #RekeyLimit default none
+
+   # Logging
+   #SyslogFacility AUTH
+   SyslogFacility AUTHPRIV
+   #LogLevel INFO
+
+   # Authentication:
+
+   #LoginGraceTime 2m
+   #PermitRootLogin prohibit-password
+   PermitRootLogin yes
+   #StrictModes yes
+   #MaxAuthTries 6
+   #MaxSessions 10
+   PubkeyAuthentication yes
+
+   # Expect .ssh/authorized_keys2 to be disregarded by default in future.
+   AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
+
+   #AuthorizedPrincipalsFile none
+
+   #AuthorizedKeysCommand none
+   #AuthorizedKeysCommandUser nobody
+
+   UsePAM yes
+   #AllowAgentForwarding yes
+   #AllowTcpForwarding yes
+   
+   #AllowTcpForwarding yes
+   #GatewayPorts no
+   X11Forwarding yes
+   #X11DisplayOffset 10
+   #X11UseLocalhost yes
+   PrintMotd no
+   # Allow client to pass locale environment variables
+   AcceptEnv LANG LC_*
+   Subsystem       sftp    /usr/lib/openssh/sftp-server
+   ```
+   Sau khi sửa đổi, lưu tệp và khởi động lại dịch vụ SSH:
    ```
    sudo systemctl restart ssh
    ```
 
-3. Tạo người dùng mới để sử dụng SSH:
+4. Tạo người dùng mới để sử dụng SSH:
    ```
    sudo adduser <tên_người_dùng>
    ```
 
-4. Gán quyền sử dụng SSH cho người dùng mới:
+5. Gán quyền sử dụng SSH cho người dùng mới:
    ```
    sudo usermod -aG sudo <tên_người_dùng>
    ```
@@ -75,3 +132,35 @@
    ```
    sudo chown -R <tên_người_dùng>:<tên_người_dùng> /home/<tên_người_dùng>
    ```
+3. Tạo và kiểm tra group: 
+   ```
+   sudo groupadd <group_name>
+   cat /etc/group
+   ```
+4. Thêm user:
+   ``` 
+   sudo adduser <user_name>
+   cat /etc/passwd
+   ```
+5. Thêm user vào group:
+   ```
+   sudo usermod -aG <group_name> <user_name>
+   ```
+6. Xoá user
+   ```
+   userdel -r <user_name>
+   ```
+7. Phân quyền cho 1 file:
+   ```
+   sudo chmod 777 <file_name.txt>
+   sudo chown <user_name> <file/folder_name>
+   sudo chgrp <group_name> <file/folder_name>
+   ```
+8. Cách swich người dùng
+   ```
+   Sudo su
+   sudo su <username>
+   ```
+
+
+   
