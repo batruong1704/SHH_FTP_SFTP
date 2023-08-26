@@ -155,7 +155,7 @@
 
 
 ## **E. SFTP trong SSH:**
-##### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
+##### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Giao thức SFTP sử dụng để kết nối, duyệt file, tải file, upload giữa server và máy khách.
 **=> Thực hiện kết nối:**
    ```
    sftp username@idhost
@@ -173,7 +173,7 @@
 | `put`           | Tải tệp từ máy cục bộ lên máy từ xa.                       | `put local_file [remote_file]`            |
 | `exit` hoặc `quit` | Thoát khỏi phiên SFTP.                                  | `exit` hoặc `quit`                        |
 
-###### => Thêm tiền tố l đứng trước để thao tác trên local. 
+###### => Thêm tiền tố l đứng trước để thao tác trên local*.
 
 
 
