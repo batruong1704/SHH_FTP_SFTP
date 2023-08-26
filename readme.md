@@ -38,70 +38,7 @@
    sudo systemctl restart ssh
    ```
 
-4. Tạo người dùng mới để sử dụng SSH:
-   ```
-   sudo adduser <tên_người_dùng>
-   ```
-
-5. Gán quyền sử dụng SSH cho người dùng mới:
-   ```
-   sudo usermod -aG sudo <tên_người_dùng>
-   ```
-
-## **B. Phân quyền cho người dùng:**
-1. Để cho phép người dùng sử dụng SSH và FTP, hãy đảm bảo rằng người dùng đã được thêm vào các nhóm tương ứng (sudo và ftp):
-   ```
-   sudo usermod -aG sudo,ftp <tên_người_dùng>
-   ```
-
-2. Đảm bảo rằng thư mục người dùng có đủ quyền để truy cập qua SFTP và FTP. Bạn có thể thực hiện điều này bằng cách chỉnh sửa quyền thư mục cụ thể:
-   ```
-   sudo chown -R <tên_người_dùng>:<tên_người_dùng> /home/<tên_người_dùng>
-   ```
-3. Tạo và kiểm tra group: 
-   ```
-   sudo groupadd <group_name>
-   cat /etc/group
-   ```
-4. Thêm user:
-   ``` 
-   sudo adduser <user_name>
-   cat /etc/passwd
-   ```
-5. Thêm user vào group:
-   ```
-   sudo usermod -aG <group_name> <user_name>
-   ```
-6. Xoá user
-   ```
-   userdel -r <user_name>
-   ```
-7. Phân quyền cho 1 file:
-   ```
-   sudo chmod 777 <file_name.txt>
-   sudo chown <user_name> <file/folder_name>
-   sudo chgrp <group_name> <file/folder_name>
-   ```
-8. Cách swich người dùng
-   ```
-   Sudo su
-   sudo su <username>
-   ```
-9. Chuyển file giữa 2 máy
-   ```
-   scp [options] <diachigoc> <diachicantruyen>
-   ```
-   ##### Ví dụ: chuyển folder project1 từ máy client tới máy ảo và lưu ở 
-   ```
-   scp -r /mylaptop/document/project1 root@192.168.1.11:/home/data
-   ```
-   ##### Một vài options:
-   - `-r`: Sao chép thư mục và nội dung bên trong (tùy chọn này được sử dụng khi bạn muốn sao chép thư mục).
-   - `-P <port>`: Xác định cổng sử dụng để kết nối SSH (mặc định là cổng 22).
-   - `-i <identity_file>`: Xác định tập tin khóa cá nhân (private key) sử dụng để xác thực đối tượng từ xa.
-   - `-v`: Hiển thị thông tin chi tiết về tiến trình sao chép.
-  
-## C. **Tạo khoá:**
+## B. **Tạo khoá:**
 1. Tạo cặp khoá:
    ```
    ssh-keygen -t rsa
@@ -133,7 +70,7 @@
    PreferredAuthentications publickey
    IdentityFile "url_luu_khoa_ip_rsa"
    ```
-## **D. Phân quyền người dùng:**
+## **C. Phân quyền người dùng:**
 ### 1. `chmod` Change mode dùng để phân quyền hạn cho thư mục hoặc cho file:
 ###### Ví dụ: Khi gõ lệnh ls -l
 ![image](https://github.com/batruong1704/SHH_FTP_SFTP/assets/142201301/299af603-7bfd-4396-bd21-1c9f40ffa188)
@@ -144,24 +81,82 @@
    | -          | Đây là 1 file                                    |
    | l          | Đây là 1 shortcut                                |
 
-- 3 kí tự tiếp theo chỉ quyền hạn cho nhóm user, 3 kí tự bên cạnh là của nhóm group, 3 kí tự cuối cùng cho nhóm còn lại `Other`:
+- 3 kí tự tiếp theo chỉ quyền hạn cho nhóm `user`, 3 kí tự bên cạnh là của nhóm `group`, 3 kí tự cuối cùng cho nhóm còn lại `Other`:
    | Kí tự      | Hệ số | Ý nghĩa                                          |
    |------------|-------|--------------------------------------------------|
    | r          | -4    | Quyền đọc                                        |
    | w          | -2    | Quyền viết                                       |
    | x          | -1    | Quyền thực thi                                   |
+   |            | -0    | Không được phân quyền                            |
+  
 ###### Lệnh:
    ```
    chmod [<option>] [permissions] file/forder_name
    ```
-**`[<option>]`:** có thể không cần thêm
+**`[<option>]`:**
    - `-R`: phân quyền cho tất cả nội dung trong thư mục.
    - `-c`: Hiển thị thông tin khi thay đổi được thực hiện.
    - `-f`: Ngăn chặn các thông báo lỗi.
    - `-v`: Hiển thị chuẩn đoán cho mỗi tệp được xử lý
+**`[permissions]`:**
+   - Thay với hệ số ở trên, 3 hệ số lần lượt với phân quyền cho đối tượng `user`, `group` và `other`.
+   - Hoặc có thể thay đổi bằng ký tự ví dụ như `u=rwx, g=rx, o=r` (Hoặc dùng `a` để chỉ tất cả). Có thể thay thế dấu `=` thành `+` giữ nguyên các quyền cũ và cộng thêm 1 quyền, thay thế `-` giữ nguyên các quyền cũ và bỏ bớt 1 quyền.
+
+
+### 2. `chowd` Change owner dùng để thay đổi quyền hạn cho folder/file:
+   ```
+   chown [<options>] [user]:[<group>] file/folder_name
+   ```
+
+### 3. Để cho phép người dùng sử dụng SSH và FTP, hãy đảm bảo rằng người dùng đã được thêm vào các nhóm tương ứng (sudo và ftp):
+   ```
+   sudo usermod -aG sudo,ftp <tên_người_dùng>
+   ```
+
+### 4. Đảm bảo rằng thư mục người dùng có đủ quyền để truy cập qua SFTP và FTP. Bạn có thể thực hiện điều này bằng cách chỉnh sửa quyền thư mục cụ thể:
+   ```
+   sudo chown -R <tên_người_dùng>:<tên_người_dùng> /home/<tên_người_dùng>
+   ```
+
+### 5. Tạo và kiểm tra group: 
+   ```
+   sudo groupadd <group_name>
+   cat /etc/group
+   ```
+
+### 6. Thêm user:
+   ``` 
+   sudo adduser <user_name>
+   cat /etc/passwd
+   ```
+
+### 7. Thêm user vào group:
+   ```
+   sudo usermod -aG <group_name> <user_name>
+   ```
+
+### 8. Xoá user
+   ```
+   userdel -r <user_name>
+   ```
+
+### 9. Phân quyền cho 1 file:
+   ```
+   sudo chmod 777 <file_name.txt>
+   sudo chown <user_name> <file/folder_name>
+   sudo chgrp <group_name> <file/folder_name>
+   ```
+
+### 10. Cách swich người dùng
+   ```
+   sudo su
+   sudo su <username>
+   ```
+
+
 ## **E. SFTP trong SSH:**
 ##### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
-=> Thực hiện kết nối: 
+**=> Thực hiện kết nối:**
    ```
    sftp username@idhost
    ```
