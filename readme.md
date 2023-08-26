@@ -5,7 +5,8 @@
    ```
    sudo apt update
    sudo apt install openssh-server
-   sudo systemctl start ssh
+   sudo systemctl start sshd
+   sudo systemctl enable ssh
    ```
 
 2. Cấu hình SSH:
@@ -138,6 +139,39 @@
    - `-P <port>`: Xác định cổng sử dụng để kết nối SSH (mặc định là cổng 22).
    - `-i <identity_file>`: Xác định tập tin khóa cá nhân (private key) sử dụng để xác thực đối tượng từ xa.
    - `-v`: Hiển thị thông tin chi tiết về tiến trình sao chép.
+  
+### D. Tạo khoá
+1. Tạo cặp khoá:
+   ```
+   ssh-keygen -t rsa
+   ```   
+   Sau đó, ta sẽ được hỏi về vị trí lưu private key <enter để lưu mặc định>. Khi kết thúc sẽ tạo ra 2 file là id_rsa <private key> và id_rsa.pub <public key>
+2. Đảm bảo cấu hình tại `/etc/ssh/sshd_config` phải có 2 dòng như sau:
+   ```
+   PubkeyAuthentication yes
+   AuthorizedKeysFile .ssh/authorized_keys
+   ```
+3. Copy file id_rsa.pub vào đường dẫn lưu trữ là file authorized_keys (phải tạo folder .ssh nếu chưa có):
+   ```
+   cp id_rsa.pub /home/abc/.ssh/authorized_keys
+   ```
+4. Khắc phục lỗi k hết nối được SSH Key, thường là do lưu file public key ở Server ở các thư mục không được chmod phù hợp.
+   ```
+   sudo chown -R server_name:server_name /home/server_name/.ssh/
+   chmod 600 /home/server_name/.ssh/authorized_keys
+   chmod 700 /home/server_name/.ssh
+   chmod 700 /home/server_name
+   ```
+5. Ở trong máy Client, copy khoá ip_rsa về máy và tạo file config trong folder .ssh như sau:
+   ```
+   scp server_name@server_id:/keys/id_rsa <url_muon_luu_tai_may_client>
+   ```
+   - nội dung file config
+   ```
+   Host <server_id>
+   PreferredAuthentications publickey
+   IdentityFile "url_luu_khoa_ip_rsa"
+   ```
    
 
 
