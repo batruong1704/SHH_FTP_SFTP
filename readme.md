@@ -101,7 +101,7 @@
    - `-i <identity_file>`: Xác định tập tin khóa cá nhân (private key) sử dụng để xác thực đối tượng từ xa.
    - `-v`: Hiển thị thông tin chi tiết về tiến trình sao chép.
   
-## C. Tạo khoá
+## C. **Tạo khoá:**
 1. Tạo cặp khoá:
    ```
    ssh-keygen -t rsa
@@ -134,7 +134,7 @@
    IdentityFile "url_luu_khoa_ip_rsa"
    ```
 
-## **D. SFTP trong SSH **
+## **D. SFTP trong SSH:**
 #### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
 => Thực hiện kết nối: 
    ```
