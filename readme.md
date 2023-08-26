@@ -136,21 +136,24 @@
 
 ## **D. SFTP trong SSH **
 #### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
-
+=> Thực hiện kết nối: 
+   ```
+   sftp username@idhost
+   ```
 | Lệnh            | Mô tả                                                      | Ví dụ                                     |
 |-----------------|------------------------------------------------------------|-------------------------------------------|
-| `ls`            | Liệt kê các tệp và thư mục trên máy từ xa.                | `ls`                                      |
-| `cd`            | Di chuyển đến thư mục trên máy từ xa.                     | `cd /path/to/directory`                   |
-| `df [path]`     | Hiển thị thông tin về không gian đĩa trên máy từ xa.     | `df` hoặc `df /path/to/directory`         |
-| `pwd`           | Hiển thị đường dẫn hiện tại trên máy từ xa.               | `pwd`                                     |
-| `mkdir`         | Tạo một thư mục trên máy từ xa.                           | `mkdir new_directory`                    |
-| `rename`        | Đổi tên hoặc di chuyển tệp/thư mục trên máy từ xa.      | `rename oldname newname`                 |
-| `rm`            | Xóa tệp hoặc thư mục trên máy từ xa.                      | `rm filename` hoặc `rm -r directory`     |
-| `get`           | Tải tệp từ máy từ xa về máy cục bộ.                      | `get remote_file [local_file]`           |
-| `put`           | Tải tệp từ máy cục bộ lên máy từ xa.                      | `put local_file [remote_file]`           |
-| `exit` hoặc `quit` | Thoát khỏi phiên SFTP.                                     | `exit` hoặc `quit`                        |
+| `ls`            | Liệt kê các tệp và thư mục trên máy từ xa.                 |                                           |
+| `cd`            | Di chuyển đến thư mục trên máy từ xa.                      |                                           |
+| `df [path]`     | Hiển thị thông tin về không gian đĩa trên máy từ xa.       |                                           |
+| `pwd`           | Hiển thị đường dẫn hiện tại trên máy từ xa.                |                                           |
+| `mkdir`         | Tạo một thư mục trên máy từ xa.                            |                                           |
+| `rename`        | Đổi tên hoặc di chuyển tệp/thư mục trên máy từ xa.         | `rename <tencu> <tenmoi>`                 |
+| `rm`            | Xóa tệp hoặc thư mục trên máy từ xa.                       |                                           |
+| `get`           | Tải tệp từ máy từ xa về máy cục bộ.                        | `get remote_file [local_file]`            |
+| `put`           | Tải tệp từ máy cục bộ lên máy từ xa.                       | `put local_file [remote_file]`            |
+| `exit` hoặc `quit` | Thoát khỏi phiên SFTP.                                  | `exit` hoặc `quit`                        |
 
-** => Thêm tiền tố l đứng trước để thao tác trên local. **
+###### => Thêm tiền tố l đứng trước để thao tác trên local. 
 
 
 
