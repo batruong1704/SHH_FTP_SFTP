@@ -1,6 +1,5 @@
 # How to use SHH/FTP/SFTP:
-## Install SSH:
-### **A. Cấu hình SSH trên Ubuntu:**
+## **A. Cấu hình SSH trên Ubuntu:**
 1. Cài đặt SSH.
    ```
    sudo apt update
@@ -49,45 +48,7 @@
    sudo usermod -aG sudo <tên_người_dùng>
    ```
 
-### **B. Cấu hình FTP/SFTP trên Ubuntu:**
-1. Cài đặt FTP:
-   ```
-   sudo apt install vsftpd
-   ```
-
-2. Mở tệp cấu hình vsftpd để chỉnh sửa:
-   ```
-   sudo nano /etc/vsftpd.conf
-   ```
-
-3. Đảm bảo rằng các dòng sau được sửa đổi hoặc thêm vào tệp cấu hình để bật hỗ trợ SFTP và chặn truy cập trực tiếp thông qua FTP:
-   ```
-   listen=YES
-   listen_ipv6=NO
-   anonymous_enable=NO
-   local_enable=YES
-   write_enable=YES
-   local_umask=022
-   dirmessage_enable=YES
-   use_localtime=YES
-   xferlog_enable=YES
-   connect_from_port_20=YES
-   chroot_local_user=YES
-   secure_chroot_dir=/var/run/vsftpd/empty
-   pam_service_name=vsftpd
-   rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-   rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-   force_dot_files=YES
-   allow_writeable_chroot=YES
-   ```
-   Lưu tệp sau khi hoàn thành chỉnh sửa.
-
-4. Khởi động lại dịch vụ vsftpd để áp dụng các thay đổi:
-   ```
-   sudo systemctl restart vsftpd
-   ```
-
-### **C. Phân quyền cho người dùng:**
+## **B. Phân quyền cho người dùng:**
 1. Để cho phép người dùng sử dụng SSH và FTP, hãy đảm bảo rằng người dùng đã được thêm vào các nhóm tương ứng (sudo và ftp):
    ```
    sudo usermod -aG sudo,ftp <tên_người_dùng>
@@ -140,7 +101,7 @@
    - `-i <identity_file>`: Xác định tập tin khóa cá nhân (private key) sử dụng để xác thực đối tượng từ xa.
    - `-v`: Hiển thị thông tin chi tiết về tiến trình sao chép.
   
-### D. Tạo khoá
+## C. Tạo khoá
 1. Tạo cặp khoá:
    ```
    ssh-keygen -t rsa
@@ -172,7 +133,24 @@
    PreferredAuthentications publickey
    IdentityFile "url_luu_khoa_ip_rsa"
    ```
-   
+
+## **D. SFTP trong SSH **
+#### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
+
+| Lệnh            | Mô tả                                                      | Ví dụ                                     |
+|-----------------|------------------------------------------------------------|-------------------------------------------|
+| `ls`            | Liệt kê các tệp và thư mục trên máy từ xa.                | `ls`                                      |
+| `cd`            | Di chuyển đến thư mục trên máy từ xa.                     | `cd /path/to/directory`                   |
+| `df [path]`     | Hiển thị thông tin về không gian đĩa trên máy từ xa.     | `df` hoặc `df /path/to/directory`         |
+| `pwd`           | Hiển thị đường dẫn hiện tại trên máy từ xa.               | `pwd`                                     |
+| `mkdir`         | Tạo một thư mục trên máy từ xa.                           | `mkdir new_directory`                    |
+| `rename`        | Đổi tên hoặc di chuyển tệp/thư mục trên máy từ xa.      | `rename oldname newname`                 |
+| `rm`            | Xóa tệp hoặc thư mục trên máy từ xa.                      | `rm filename` hoặc `rm -r directory`     |
+| `get`           | Tải tệp từ máy từ xa về máy cục bộ.                      | `get remote_file [local_file]`           |
+| `put`           | Tải tệp từ máy cục bộ lên máy từ xa.                      | `put local_file [remote_file]`           |
+| `exit` hoặc `quit` | Thoát khỏi phiên SFTP.                                     | `exit` hoặc `quit`                        |
+
+** => Thêm tiền tố l đứng trước để thao tác trên local. **
 
 
 
