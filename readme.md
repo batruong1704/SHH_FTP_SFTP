@@ -133,9 +133,34 @@
    PreferredAuthentications publickey
    IdentityFile "url_luu_khoa_ip_rsa"
    ```
+## **D. Phân quyền người dùng:**
+### 1. `chmod` Change mode dùng để phân quyền hạn cho thư mục hoặc cho file:
+###### Ví dụ: Khi gõ lệnh ls -l
+![image](https://github.com/batruong1704/SHH_FTP_SFTP/assets/142201301/299af603-7bfd-4396-bd21-1c9f40ffa188)
+- Kí tự đầu tiên thể hiện là thư mục hay là file:
+   | Kí tự      | Ý nghĩa                                          |
+   |------------|--------------------------------------------------|
+   | d          | Đây là thư mục `directory`                       |
+   | -          | Đây là 1 file                                    |
+   | l          | Đây là 1 shortcut                                |
 
-## **D. SFTP trong SSH:**
-#### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
+- 3 kí tự tiếp theo chỉ quyền hạn cho nhóm user, 3 kí tự bên cạnh là của nhóm group, 3 kí tự cuối cùng cho nhóm còn lại `Other`:
+   | Kí tự      | Hệ số | Ý nghĩa                                          |
+   |------------|-------|--------------------------------------------------|
+   | r          | -4    | Quyền đọc                                        |
+   | w          | -2    | Quyền viết                                       |
+   | x          | -1    | Quyền thực thi                                   |
+###### Lệnh:
+   ```
+   chmod [<option>] [permissions] file/forder_name
+   ```
+**`[<option>]`:** có thể không cần thêm
+   - `-R`: phân quyền cho tất cả nội dung trong thư mục.
+   - `-c`: Hiển thị thông tin khi thay đổi được thực hiện.
+   - `-f`: Ngăn chặn các thông báo lỗi.
+   - `-v`: Hiển thị chuẩn đoán cho mỗi tệp được xử lý
+## **E. SFTP trong SSH:**
+##### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Bạn chỉnh việc sử dụng một trình FTP Client có hỗ trợ giao thức SFTP để kết nối, duyệt file, tải file, upload giữa server và máy khách.
 => Thực hiện kết nối: 
    ```
    sftp username@idhost
