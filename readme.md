@@ -119,36 +119,44 @@
    sudo chown -R <tên_người_dùng>:<tên_người_dùng> /home/<tên_người_dùng>
    ```
 
-### 5. Tạo và kiểm tra group: 
+### 5. Group: 
    ```
    sudo groupadd <group_name>
+   
+   ```
+- Kiểm tra các group đã được thêm:
+   ```
    cat /etc/group
    ```
-
-### 6. Thêm user:
+- Loại bỏ người dùng ra 1 nhóm:
+   ```
+   sudo gpasswd -d <user_name> <group_name>
+   ```
+### 6. User:
    ``` 
    sudo adduser <user_name>
+   ```
+- Kiểm tra xem đã thêm thành công hay chưa:
+   ```
    cat /etc/passwd
    ```
-
-### 7. Thêm user vào group:
+- Thêm user vào group:
    ```
    sudo usermod -aG <group_name> <user_name>
    ```
-
-### 8. Xoá user
+- Xoá user:
    ```
    userdel -r <user_name>
    ```
 
-### 9. Phân quyền cho 1 file:
+### 7. Phân quyền cho 1 file:
    ```
    sudo chmod 777 <file_name.txt>
    sudo chown <user_name> <file/folder_name>
    sudo chgrp <group_name> <file/folder_name>
    ```
 
-### 10. Cách swich người dùng
+### 8. Cách swich người dùng
    ```
    sudo su
    sudo su <username>
