@@ -73,7 +73,7 @@
    ```
 ## **C. Phân quyền người dùng:**
 ### 1. `chmod` Change mode dùng để phân quyền hạn cho thư mục hoặc cho file:
-###### Ví dụ: Khi gõ lệnh ls -l
+##### Ví dụ: Khi gõ lệnh ls -l
 ![image](https://github.com/batruong1704/SHH_FTP_SFTP/assets/142201301/299af603-7bfd-4396-bd21-1c9f40ffa188)
 - Kí tự đầu tiên thể hiện là thư mục hay là file:
    | Kí tự      | Ý nghĩa                                          |
