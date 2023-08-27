@@ -99,7 +99,7 @@
    - `-f`: Ngăn chặn các thông báo lỗi.
    - `-v`: Hiển thị chuẩn đoán cho mỗi tệp được xử lý
 **`[permissions]`:**
-   - Thay với hệ số ở trên, 3 hệ số lần lượt với phân quyền cho đối tượng `user`, `group` và `other`.
+   - Thay với hệ số ở trên, 3 hệ số lần lượt với phân quyền cho đối tượng `user`, `group` và `other`. *Ví dụ:* `chmod -r 755 folder_name`
    - Hoặc có thể thay đổi bằng ký tự ví dụ như `u=rwx, g=rx, o=r` (Hoặc dùng `a` để chỉ tất cả). Có thể thay thế dấu `=` thành `+` giữ nguyên các quyền cũ và cộng thêm 1 quyền, thay thế `-` giữ nguyên các quyền cũ và bỏ bớt 1 quyền.
 
 
