@@ -18,6 +18,7 @@
    Include /etc/ssh/sshd_config.d/*.conf
 
    Port 22
+   # Chú ý: bạn thay đổi chỉ số ở đây chính là việc bạn đang thay đổi cổng post
    ListenAddress 0.0.0.0
    HostKey /etc/ssh/ssh_host_rsa_key
    HostKey /etc/ssh/ssh_host_ecdsa_key
