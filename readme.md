@@ -153,9 +153,39 @@
    sudo su
    sudo su <username>
    ```
+## **E. Port** ##
+Dịch vụ SSH (Secure Shell) là một phương tiện an toàn để truy cập và điều khiển từ xa vào máy chủ hoặc hệ thống. Thông thường, cổng mặc định của SSH là 22, nhưng bạn có thể thay đổi cổng này để tăng cường bảo mật hệ thống. Dưới đây là một số thông tin cơ bản liên quan đến cổng và các lệnh liên quan đến dịch vụ SSH trên Ubuntu:
 
+1. **Sửa đổi cổng SSH:**
+   - Mở tệp cấu hình SSH bằng trình soạn thảo:
+     ```
+     sudo nano /etc/ssh/sshd_config
+     ```
 
-## **E. SFTP trong SSH:**
+   - Tìm dòng `Port 22` và thay đổi số 22 thành cổng mới bạn muốn sử dụng (ví dụ: 2222).
+
+   - Lưu và thoát trình soạn thảo.
+
+   - Khởi động lại dịch vụ SSH để áp dụng thay đổi:
+     ```
+     sudo service ssh restart
+     ```
+
+2. **Mở cổng mới trên tường lửa:**
+   - Ví dụ với UFW (Uncomplicated Firewall):
+     ```
+     sudo ufw allow 2222/tcp
+     sudo ufw reload
+     ```
+
+3. **Kết nối SSH qua cổng mới:**
+   - Khi bạn đã thay đổi cổng SSH thành cổng mới (ví dụ: 2222), bạn cần chỉ định cổng này khi kết nối đến máy chủ qua SSH:
+     ```
+     ssh username@hostname -p 2222
+     ```
+
+##### Chú ý: Port mặc định cho dịch vụ SSH là cổng 22. 
+## **F. SFTP trong SSH:**
 ##### Khi cài đặt OpenSSH Server, nó đã có sẵn sftp-server. Giao thức SFTP sử dụng để kết nối, duyệt file, tải file, upload giữa server và máy khách.
 **=> Thực hiện kết nối:**
    ```
