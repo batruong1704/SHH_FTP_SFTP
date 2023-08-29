@@ -26,8 +26,14 @@
    SyslogFacility AUTHPRIV
    PermitRootLogin yes
    PubkeyAuthentication yes
-
    AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
+   ##: Chophep/Tu choi SSH
+   # AlowUsers user1
+   # DenyUsers user1
+   ##: Tu choi SFTP
+   # Match User user1
+   # ForceCommand internal-sftp
+
    UsePAM yes
    X11Forwarding yes
    PrintMotd no
