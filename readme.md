@@ -184,7 +184,10 @@ Dịch vụ SSH (Secure Shell) là một phương tiện an toàn để truy c�
      ```
      sudo service ssh restart
      ```
-
+   - Truy cập từ máy khách:
+      ```
+      ssh username@hostname -p 2222
+      ```
 2. **Mở cổng mới trên tường lửa:**
    - Ví dụ với UFW (Uncomplicated Firewall):
      ```
