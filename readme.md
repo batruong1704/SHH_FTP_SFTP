@@ -31,8 +31,10 @@
    # AlowUsers user1
    # DenyUsers user1
    ##: Tu choi SFTP
-   # Match User user1
-   # ForceCommand internal-sftp
+   #Match User user2
+   #ForceCommand /bin/false
+   #Match User user3
+   #ForceCommand internal-sftp
 
    UsePAM yes
    X11Forwarding yes
